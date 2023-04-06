@@ -1,2 +1,2 @@
 # profdiegoaugusto
-Trabalho 2 Programação - Sabrina Liboni
+Exercício 2 de Programação de soluções computacionais - Sabrina Liboni

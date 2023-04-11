@@ -2,7 +2,7 @@ import java.math.BigDecimal;
 import java.util.Scanner;
 import javax.swing.JOptionPane;
 
-public class App {
+public class FolhaPagamento {
     public static void main(String[] args) {
 
         Scanner console = new Scanner(System.in);

@@ -4,7 +4,7 @@ import java.util.zip.GZIPOutputStream;
 
 import javax.swing.JOptionPane;
 
-public class App {
+public class FolhaPagamento {
     public static void main(String[] args) {
 
         Scanner console = new Scanner(System.in);

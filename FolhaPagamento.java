@@ -1,14 +1,16 @@
 import java.math.BigDecimal;
 import java.util.Scanner;
+import java.util.zip.GZIPOutputStream;
+
 import javax.swing.JOptionPane;
 
-public class FolhaPagamento {
+public class App {
     public static void main(String[] args) {
 
         Scanner console = new Scanner(System.in);
 
         String nom_func, cargo_fun, cpf_func, ind_periculosidade, ind_insalubridade;
-        double val_salario, val_horaobrig, qtd_diasuteis, val_periculosidade, val_insalubridade, val_adicional;
+        double val_salario, val_horaobrig, qtd_diasuteis, val_periculosidade, val_insalubridade, val_adicional, val_refeicao, val_INSS, val_IRRF;
 
         System.out.printf("Informar o nome do funcionario: ");
         nom_func = console.nextLine();
@@ -28,6 +30,9 @@ public class FolhaPagamento {
         System.out.printf("Informar o salario base: ");
         val_salario = console.nextDouble();
 
+        System.out.printf("Informar valor base vale refeição: ");
+        val_refeicao = console.nextDouble();
+
         System.out.printf("Informar a quantidade de dias uteis: ");
         qtd_diasuteis = console.nextDouble();
 
@@ -44,6 +49,39 @@ public class FolhaPagamento {
         }
         val_adicional = 0;
         val_adicional = val_insalubridade + val_periculosidade;
+        
+        val_INSS = 0;
+
+        if (val_salario <= 1.302) {
+            val_INSS = 0.075;
+        }
+        else if (val_salario > 1.302 && val_salario < 2571.29) {
+            val_INSS = 0.09;
+        }
+        else if (val_salario > 2571.29 && val_salario < 3856.94) {
+            val_INSS = 0.12;
+        }
+        else if (val_salario > 3856.94 && val_salario < 7507.49) {
+            val_INSS = 0.14;
+        }
+       
+        val_IRRF = 0;
+
+        if (val_salario <= 1903.98) {
+            val_IRRF = 0;
+        }
+        else if (val_salario > 1903.98 && val_salario < 2826.65) {
+            val_IRRF = 0.075;
+        }
+        else if (val_salario > 2826.65 && val_salario < 3751.05) {
+            val_IRRF = 0.15;
+        }
+        else if (val_salario > 3751.05 && val_salario < 4664.68) {
+            val_IRRF = 0.225;
+        }
+        else if (val_salario > 4664.68) {
+                val_IRRF = 0.275;
+        }    
 
         System.out.println("##########################################################################");
         System.out.println("                                                                          ");
@@ -55,9 +93,18 @@ public class FolhaPagamento {
         System.out.println("                                                                          ");
         System.out.println("Horas Obrigatorias no mês: " + val_horaobrig * qtd_diasuteis);
         System.out.println("                                                                          ");
-        System.out.println("Valor hora salario R$: " + (val_salario + val_adicional) / (val_horaobrig * qtd_diasuteis));
+        System.out.println("Desconto FGTS: " + val_salario * 0.08);
         System.out.println("                                                                          ");
+        System.out.println("Valor hora salario R$: " + val_salario / (val_horaobrig * qtd_diasuteis));
         System.out.println("                                                                          ");
+        System.out.println("Vale alimentaçao: " + val_refeicao * qtd_diasuteis);   
+        System.out.println("                                                                          ");
+        System.out.println("Vale transporte: " + val_salario * 0.06); 
+        System.out.println("                                                                          ");
+        System.out.println("Desconto INSS: " + val_salario * val_INSS                                    );
+        System.out.println("                                                                          ");
+        System.out.println("Desconto IRRF: " + val_salario * val_IRRF                                    );
+        System.out.println("                                                                           ");
         System.out.println("##########################################################################");
     }
 }
